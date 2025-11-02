@@ -12,7 +12,7 @@ devtools::install_github("ICHydro/topmodel")
 
 ## Main Features
 
-- **Rainfall-runoff modeling**: Simulate flow from precipitation and evapotranspiration data
+- **Rainfall-runoff modeling**: Simulate discharge from precipitation and evapotranspiration data
 - **Topographical analysis**: Calculate topographic indices and flow delay functions from digital elevation models
 - **Sensitivity analysis**: Explore parameter sensitivity using Monte Carlo sampling
 - **Uncertainty analysis**: GLUE (Generalized Likelihood Uncertainty Estimation) framework for prediction uncertainty
