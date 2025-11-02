@@ -5,8 +5,8 @@ void topidx_calc(double *topidx, int nidxclass)
 	int	i, j;
 	double	x;
 
-	idxstats.atb = (double *) Calloc(nidxclass, double);
-	idxstats.Aatb_r = (double *) Calloc(nidxclass, double);
+	idxstats.atb = (double *) R_Calloc(nidxclass, double);
+	idxstats.Aatb_r = (double *) R_Calloc(nidxclass, double);
 
 	for(i=0; i<nidxclass; i++) {
 		idxstats.atb[i] = topidx[i];
@@ -36,40 +36,40 @@ void memory_allocation(int nch, int ntimestep, int nidxclass)
 {
 	int i;
 
-	misc.Qt = (double *) Calloc(ntimestep, double);
-	misc.S_mean = (double *) Calloc(ntimestep, double);
+	misc.Qt = (double *) R_Calloc(ntimestep, double);
+	misc.S_mean = (double *) R_Calloc(ntimestep, double);
 
-	params.d = (double *) Calloc(nch, double);
-	params.Ad_r = (double *) Calloc(nch, double);
+	params.d = (double *) R_Calloc(nch, double);
+	params.Ad_r = (double *) R_Calloc(nch, double);
 
-	misc.Srz = (double **) Calloc(ntimestep, double *); /* Root zone storage deficit */
-	misc.Suz = (double **) Calloc(ntimestep, double *); /* Unsaturated zone storage */
+	misc.Srz = (double **) R_Calloc(ntimestep, double *); /* Root zone storage deficit */
+	misc.Suz = (double **) R_Calloc(ntimestep, double *); /* Unsaturated zone storage */
 
-	misc.S = (double **) Calloc(ntimestep, double *);
-	misc.Ea = (double **) Calloc(ntimestep, double *);
-	misc.ex = (double **) Calloc(ntimestep, double *);
+	misc.S = (double **) R_Calloc(ntimestep, double *);
+	misc.Ea = (double **) R_Calloc(ntimestep, double *);
+	misc.ex = (double **) R_Calloc(ntimestep, double *);
 
-	misc.qt = (double **) Calloc(ntimestep, double *);
-	misc.qo = (double **) Calloc(ntimestep, double *);
-	misc.qv = (double **) Calloc(ntimestep, double *);
-	misc.qint = (double **) Calloc(ntimestep, double *);
+	misc.qt = (double **) R_Calloc(ntimestep, double *);
+	misc.qo = (double **) R_Calloc(ntimestep, double *);
+	misc.qv = (double **) R_Calloc(ntimestep, double *);
+	misc.qint = (double **) R_Calloc(ntimestep, double *);
 
-	misc.qs = (double *) Calloc(ntimestep, double);
-	misc.f = (double *) Calloc(ntimestep, double);
-	misc.fex = (double *) Calloc(ntimestep, double);
+	misc.qs = (double *) R_Calloc(ntimestep, double);
+	misc.f = (double *) R_Calloc(ntimestep, double);
+	misc.fex = (double *) R_Calloc(ntimestep, double);
 
 	for(i=0; i<ntimestep; i++){
-		misc.Srz[i] = (double *) Calloc(nidxclass, double);
-		misc.Suz[i] = (double *) Calloc(nidxclass, double);
+		misc.Srz[i] = (double *) R_Calloc(nidxclass, double);
+		misc.Suz[i] = (double *) R_Calloc(nidxclass, double);
 
-		misc.S[i]  = (double *) Calloc(nidxclass, double);
-		misc.Ea[i] = (double *) Calloc((nidxclass + 1), double);
-		misc.ex[i] = (double *) Calloc((nidxclass + 1), double);
+		misc.S[i]  = (double *) R_Calloc(nidxclass, double);
+		misc.Ea[i] = (double *) R_Calloc((nidxclass + 1), double);
+		misc.ex[i] = (double *) R_Calloc((nidxclass + 1), double);
 
-		misc.qt[i] = (double *) Calloc((nidxclass + 1), double);
-		misc.qo[i] = (double *) Calloc((nidxclass + 1), double);
-		misc.qv[i] = (double *) Calloc((nidxclass + 1), double);
-		misc.qint[i] = (double *) Calloc((nidxclass + 1), double);
+		misc.qt[i] = (double *) R_Calloc((nidxclass + 1), double);
+		misc.qo[i] = (double *) R_Calloc((nidxclass + 1), double);
+		misc.qv[i] = (double *) R_Calloc((nidxclass + 1), double);
+		misc.qint[i] = (double *) R_Calloc((nidxclass + 1), double);
 	}
 
 	return;
@@ -80,43 +80,43 @@ void memory_free(int nch, int ntimestep, int nidxclass)
 	int i;
 
 	for(i=0; i<ntimestep; i++){
-		Free(misc.Srz[i]);
-		Free(misc.Suz[i]);
+		R_Free(misc.Srz[i]);
+		R_Free(misc.Suz[i]);
 
-		Free(misc.S[i]);
-		Free(misc.Ea[i]);
-		Free(misc.ex[i]);
+		R_Free(misc.S[i]);
+		R_Free(misc.Ea[i]);
+		R_Free(misc.ex[i]);
 
-		Free(misc.qt[i]);
-		Free(misc.qo[i]);
-		Free(misc.qv[i]);
-		Free(misc.qint[i]);
+		R_Free(misc.qt[i]);
+		R_Free(misc.qo[i]);
+		R_Free(misc.qv[i]);
+		R_Free(misc.qint[i]);
 	}
 
-	Free(misc.Qt);
-	Free(misc.S_mean);
+	R_Free(misc.Qt);
+	R_Free(misc.S_mean);
 
-	Free(params.d);
-	Free(params.Ad_r);
+	R_Free(params.d);
+	R_Free(params.Ad_r);
 
-	Free(misc.Srz);
-	Free(misc.Suz);
+	R_Free(misc.Srz);
+	R_Free(misc.Suz);
 
-	Free(misc.S);
-	Free(misc.Ea);
-	Free(misc.ex);
+	R_Free(misc.S);
+	R_Free(misc.Ea);
+	R_Free(misc.ex);
 
-	Free(misc.qt);
-	Free(misc.qo);
-	Free(misc.qv);
-	Free(misc.qint);
+	R_Free(misc.qt);
+	R_Free(misc.qo);
+	R_Free(misc.qv);
+	R_Free(misc.qint);
 
-	Free(misc.qs);
-	Free(misc.f);
-	Free(misc.fex);
+	R_Free(misc.qs);
+	R_Free(misc.f);
+	R_Free(misc.fex);
 
-	Free(idxstats.atb);
-	Free(idxstats.Aatb_r);
+	R_Free(idxstats.atb);
+	R_Free(idxstats.Aatb_r);
 
 /* a few missing! */
 
