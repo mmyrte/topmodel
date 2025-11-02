@@ -10,6 +10,10 @@ Description: Set of hydrological functions including an R
         based on the 1995 FORTRAN version by Keith Beven. From version
         0.7.0, the package is put into maintenance mode.
 License: GPL (>= 2)
-Imports: methods
+Imports:
+    methods,
+    Hmisc
 URL: https://github.com/ICHydro/topmodel
 Repository: CRAN
+RoxygenNote: 7.3.3
+Encoding: UTF-8
