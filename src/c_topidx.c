@@ -10,7 +10,7 @@
 
 void c_topidx(double *inputdem,
 	    int    *inputriver,
-	    int    *nrow, 
+	    int    *nrow,
 	    int    *ncol,
 	    double *ew_res,
 	    double *ns_res,
@@ -21,12 +21,12 @@ void c_topidx(double *inputdem,
   int    nrout,river,not_yet;
   double **dem, **atb, **area, **slope, **rivermap;
   double exclude,dnx,routefac,nslp;
-  int    nsink = 0;
+  // int    nsink = 0;
   double routdem[9], tanb[9];
   double c,dx1,dx2,sum,sumtb;
 
   /* memory allocation */
-          
+
   dem   = (double **) R_alloc(*nrow, sizeof(double *));
   atb   = (double **) R_alloc(*nrow, sizeof(double *));
   area  = (double **) R_alloc(*nrow, sizeof(double *));
@@ -97,7 +97,7 @@ void c_topidx(double *inputdem,
 
     for(j = 0; j < *ncol; j++) {
       for(i = 0; i < *nrow; i++) {
-              
+
         /* skip non catchment cells and cells that are done */
         if((dem[i][j] == exclude) || (atb[i][j] >= ZERO))
 	  continue;
@@ -108,7 +108,7 @@ void c_topidx(double *inputdem,
         if(rivermap[i][j] == 1) river = 1;
         else {
 
-          /* check the 8 flow directions for upslope elements 
+          /* check the 8 flow directions for upslope elements
              without a topidx value */
 
           not_yet = 0;
@@ -116,7 +116,7 @@ void c_topidx(double *inputdem,
           for(jj=-1; jj < 2; jj++){
             for(ii=-1; ii < 2; ii++){
               if(((i+ii >= 0) && (i+ii < *nrow) && (j+jj >= 0) && (j+jj < *ncol))
-                 && ((ii != 0) || (jj != 0)) 
+                 && ((ii != 0) || (jj != 0))
                  && (dem[i+ii][j+jj] != exclude)) {
                 if((dem[i+ii][j+jj] > dem[i][j]) && (atb[i+ii][j+jj] < ZERO))
                   not_yet = 1;
@@ -129,7 +129,7 @@ void c_topidx(double *inputdem,
           /* if there are no upslope elements without a topidx value,
              start calculations */
 
-          /* find the outflow direction and calculate the sum of weights using 
+          /* find the outflow direction and calculate the sum of weights using
              (tanb*countour length). Contour length = 0.5dx for the cardinal
              direction and 0.354dx for diagonal */
 
@@ -145,7 +145,7 @@ void c_topidx(double *inputdem,
           for(jj=-1; jj < 2; jj++){
             for(ii=-1; ii < 2; ii++){
               if(((i+ii >= 0) && (i+ii < *nrow) && (j+jj >= 0) && (j+jj < *ncol))
-                 && ((ii != 0) || (jj != 0)) 
+                 && ((ii != 0) || (jj != 0))
                  && (dem[i+ii][j+jj] != exclude)) {
                 if((ii == 0) || (jj == 0)) {
                   dnx = dx1;
@@ -172,7 +172,7 @@ void c_topidx(double *inputdem,
 	/* if a sink or a river cell... */
 
         if((nrout == 0) || (river == 1)) {
-	        nsink++;
+	        // nsink++;
           river = 0;
 
           /* assume that there is a channel of length dx running midway through
@@ -184,7 +184,7 @@ void c_topidx(double *inputdem,
           for(jj=-1; jj < 2; jj++){
             for(ii=-1; ii < 2; ii++){
               if(((i+ii >= 0) && (i+ii < *nrow) && (j+jj >= 0) && (j+jj < *ncol))
-                 && ((ii != 0) || (jj != 0)) 
+                 && ((ii != 0) || (jj != 0))
                  && (dem[i+ii][j+jj] != exclude)) {
                 if((ii == 0) || (jj == 0)) dnx = dx1;
                 else dnx = dx2;
@@ -237,7 +237,7 @@ void c_topidx(double *inputdem,
 	for(jj=-1; jj < 2; jj++){
 	  for(ii=-1; ii < 2; ii++){
 	    if(((i+ii >= 0) && (i+ii < *nrow) && (j+jj >= 0) && (j+jj < *ncol))
-	       && ((ii != 0) || (jj != 0)) 
+	       && ((ii != 0) || (jj != 0))
 	       && (atb[i+ii][j+jj] != exclude)) {
 	      if(routdem[nrout] > 0) area[i+ii][j+jj] += c * routdem[nrout];
 	    }
@@ -261,7 +261,3 @@ void c_topidx(double *inputdem,
   }
   return;
 }
-
-
-
-
